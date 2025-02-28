@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCatDto, ListAllEntities, UpdateCatDto } from './dto';
+import { ListAllEntities } from './dto';
+import { Cat } from './interfaces/cat.interface';
 
 @Injectable()
 export class CatsService {
 
-  async create(createCatDto: CreateCatDto): Promise<string> {
+  async create(cat: Cat): Promise<string> {
     await this.sleep();
 
-    return `Cat ${JSON.stringify(createCatDto)} created`;
+    return `Cat ${JSON.stringify(cat)} created`;
   }
 
   async findAll(listAllEntities: ListAllEntities): Promise<string> {
@@ -22,10 +23,10 @@ export class CatsService {
     return `Cat :${id} finded`;
   }
 
-  async update(id: number, updateCatDto: UpdateCatDto): Promise<string> {
+  async update(id: number, cat: Cat): Promise<string> {
     await this.sleep();
 
-    return `Cat :${id} updated ${JSON.stringify(updateCatDto)}`;
+    return `Cat :${id} updated ${JSON.stringify(cat)}`;
   }
 
   async remove(id: number): Promise<string> {
