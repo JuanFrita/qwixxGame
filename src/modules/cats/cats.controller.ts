@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Header, Param, Body, Query, Put, Delete, ForbiddenException, BadRequestException, UseFilters } from '@nestjs/common';
+import { Controller, Get, Post, Header, Param, Body, Query, Put, Delete, BadRequestException, UseFilters } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './dto';
 import { HttpExceptionFilter } from '../common/exception-filter/http-exception.filter';
