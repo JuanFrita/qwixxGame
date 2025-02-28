@@ -5,6 +5,13 @@ import { Cat } from './interfaces/cat.interface';
 @Injectable()
 export class CatsService {
 
+  async error() {
+    await this.sleep();
+
+    throw new Error("Cats don't like you");
+  }
+
+
   async create(cat: Cat): Promise<string> {
     await this.sleep();
 

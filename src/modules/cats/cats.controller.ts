@@ -1,11 +1,25 @@
-import { Controller, Get, Post, Header, Param, Body, Query, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Header, Param, Body, Query, Put, Delete, ForbiddenException, BadRequestException, UseFilters } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './dto';
+import { HttpExceptionFilter } from '../common/exception-filter/http-exception.filter';
 
 @Controller('cats')
+@UseFilters(HttpExceptionFilter)
 export class CatsController {
 
   constructor(private readonly catsService: CatsService) { }
+
+  @Post('/exception')
+  async exception() {
+    try {
+      await this.catsService.error();
+    } catch (error) {
+      throw new BadRequestException('You can not access to cats', {
+        cause: error,
+        description: 'Miau...'
+      });
+    }
+  }
 
   @Post('/')
   @Header('Cache-Control', 'no-store')
