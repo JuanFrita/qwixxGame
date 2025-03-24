@@ -1,17 +1,7 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { CatsModule } from './modules/cats/cats.module';
-import { AdminModule } from './modules/admin/admin.module';
-import { AccountModule } from './modules/account/account.module';
-import { CatsController } from './modules/cats/cats.controller';
-import { LoggerMiddleware } from './modules/common/middleware/logger.middleware copy';
+import { Module } from "@nestjs/common";
+import { GameModule } from "./modules/game/game.module";
+
 @Module({
-  imports: [CatsModule, AdminModule, AccountModule],
+  imports: [GameModule],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .exclude({ path: 'cats', method: RequestMethod.GET })
-      .forRoutes(CatsController);
-  }
-}
+export class AppModule{}
